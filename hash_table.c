@@ -18,3 +18,14 @@ typedef struct HashTable {
     int tamanho;
     EntradaHash **tabela; // Array de ponteiros para EntradaHash
 } TabelaHash;
+
+// Função de Hash
+unsigned long funcaoHash(const char *str, int tam_tabela) {
+    
+    unsigned long hash = 5381;
+    int c;
+    while ((c = *str++)) {
+        hash = ((hash << 5) + hash) + c;
+    }
+    return hash % tam_tabela;
+}
