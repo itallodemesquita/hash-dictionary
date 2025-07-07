@@ -83,3 +83,24 @@ void insPalavra(TabelaHash *tabela, const char *palavra, const char *significado
     novaEntrada -> proximo = tabela -> tabela[indice];
     tabela -> tabela[indice];
 }
+
+EntradaHash *buscarPalavra(TabelaHash *tabela, const char *palavra) {
+    if (tabela = NULL) return NULL;
+
+    // Calcula o índice da palavra
+    unsigned int indice = funcaoHash(palavra, tabela -> tamanho);
+
+    // Percorre a lista ligada
+    EntradaHash *atual = tabela -> tabela[indice];
+    while (atual != NULL) {
+        // Compara a palavra atual com a buscada
+        if (strcmp(atual -> palavra, palavra) == 0) {
+            return atual;
+        }
+        atual = atual -> proximo;
+    }
+
+    // Caso a palavra não seja encontrada
+    return NULL;
+}
+
