@@ -13,7 +13,7 @@ typedef struct Significado {
 typedef struct EntradaHash {
     char *palavra;
     Significado *significados; // Aponta pro início da lista
-    struct EntradaHash *próximo;
+    struct EntradaHash *proximo;
 } EntradaHash;
 
 // Estrutura para a hash
