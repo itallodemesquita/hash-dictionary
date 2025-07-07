@@ -39,3 +39,47 @@ TabelaHash *criarTabela(int tamanho) {
 
     return tabelaHash;
 }
+
+void insPalavra(TabelaHash *tabela, const char *palavra, const char *significado) {
+    if (tabela == NULL) return;
+
+    // Cálculo do índice com função hash
+    unsigned int indice = funcaoHash(palavra, tabela -> tamanho);
+
+    // Verifica se a palavra já existe no bucket
+    EntradaHash *atual = tabela -> tabela[indice];
+    while (atual != NULL) {
+        if (strcmp(atual -> palavra, palavra) == 0) {
+            // Se a palavra já existe, adicionamos um novo significado
+            Significado *novoSignificado = (Significado*) malloc(sizeof(Significado));
+            if(novoSignificado == NULL) return;
+
+            novoSignificado -> definicao = strdup(significado);
+            novoSignificado -> proximo = atual -> significados;
+            atual -> significados = novoSignificado;
+            return;
+        }
+
+        atual = atual -> proximo;
+    }
+
+    // Cria nova entrada (se a palavra não for encontrada)
+    EntradaHash *novaEntrada = (EntradaHash*) malloc(sizeof(EntradaHash));
+    if(novaEntrada == NULL) return;
+
+    novaEntrada -> palavra = strdup(palavra);
+
+    // Cria o primeiro nó da lista de significados
+    novaEntrada -> significados == (Significado*) malloc(sizeof(Significado));
+    if(novaEntrada -> significados == NULL) {
+        free(novaEntrada -> palavra);
+        free(novaEntrada);
+        return;
+    }
+    novaEntrada -> significados -> definicao = strdup(significado);
+    novaEntrada -> significados -> proximo = NULL;
+
+    // Insere a nova entrada no início da lista
+    novaEntrada -> proximo = tabela -> tabela[indice];
+    tabela -> tabela[indice];
+}
