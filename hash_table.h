@@ -17,7 +17,7 @@ typedef struct EntradaHash {
 } EntradaHash;
 
 // Estrutura para a hash
-typedef struct HashTable {
+typedef struct TabelaHash {
     int tamanho;
     EntradaHash **tabela; // Array de ponteiros para EntradaHash
 } TabelaHash;
