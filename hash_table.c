@@ -104,3 +104,47 @@ EntradaHash *buscarPalavra(TabelaHash *tabela, const char *palavra) {
     return NULL;
 }
 
+void removerPalavra(TabelaHash *tabela, const char *palavra) {
+    if (tabela == NULL) return;
+
+    unsigned int indice = funcaoHash(palavra, tabela -> tamanho);
+
+    EntradaHash *atual = tabela -> tabela[indice];
+    EntradaHash *anterior = NULL;
+
+    // Eccontra a palavra na lista
+    while (atual != NULL && strcmp(atual -> palavra, palavra) != 0) {
+        anterior = atual;
+        atual = atual -> proximo;
+    }
+
+    // Se for vazio, a palavra não foi encontrada
+    if (atual == NULL) {
+        printf("Palavra '%s' não foi encontrada para remoção.\n", palavra);
+        return;
+    }
+
+    // Liga os elementos da lista novamente
+    if (anterior == NULL) {
+        // Remove o primeiro nó
+        tabela -> tabela[indice] = atual -> proximo;
+    } else {
+        // O nó está no meio ou no fim da lista
+        anterior -> proximo = atual -> proximo;
+    }
+
+    // Libera memória para a entrada
+    Significado *sigAtual = atual -> significados;
+    while (sigAtual != NULL) {
+        Significado *proximoSig = sigAtual -> proximo;
+        free(sigAtual -> definicao);
+        free(sigAtual);
+        sigAtual = proximoSig;
+    }
+
+    // LIbera a palavra e o nó da entrada principal
+    free(atual -> palavra);
+    free(atual);
+
+    printf("Palavra '%s' removida com sucesso!\n", palavra);
+}
