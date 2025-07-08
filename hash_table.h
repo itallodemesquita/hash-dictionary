@@ -23,4 +23,12 @@ typedef struct TabelaHash {
 } TabelaHash;
 
 
+TabelaHash *criarTabela(int tamanho);
+
+void insPalavra(TabelaHash *tabela, const char *palavra, const char *significado);
+
+EntradaHash *buscarPalavra(TabelaHash *tabela, const char *palavra);
+
+void removerPalavra(TabelaHash *tabela, const char *palavra);
+
 #endif
