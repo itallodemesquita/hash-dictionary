@@ -148,3 +148,38 @@ void removerPalavra(TabelaHash *tabela, const char *palavra) {
 
     printf("Palavra '%s' removida com sucesso!\n", palavra);
 }
+
+void listar(TabelaHash *tabela) {
+    if (tabela == NULL) return;
+
+    printf("\n-- Lista de palavras no dicionário --\n");
+    int cont = 0;
+
+    // Percorre cada bucket da tabela hash
+    for (int i = 0; i < tabela -> tamanho; i++) {
+        EntradaHash *entrada = tabela -> tabela[i];
+
+        // Se não estiver vazio, percorre a lista ligada
+        while (entrada != NULL) {
+            cont++;
+            printf("\n%d. Palavra: %s\n", cont, entrada -> palavra);
+
+            // Percorre e imprime todos os significados da palavra
+            Significado *sig = entrada -> significados;
+            int sig_count = 1;
+            while (sig != NULL) {
+                printf("Significado %d: %s\n", sig_count, sig -> definicao);
+                sig = sig -> proximo;
+                sig_count++;
+            }
+
+            entrada = entrada -> proximo;
+        }
+    }
+
+    if (cont == 0) {
+        printf("\nO dicionário está vazio.\n");
+    }
+
+    printf("\n-- Fim da lista -- \n");
+}
