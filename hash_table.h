@@ -31,4 +31,6 @@ EntradaHash *buscarPalavra(TabelaHash *tabela, const char *palavra);
 
 void removerPalavra(TabelaHash *tabela, const char *palavra);
 
+void listar(TabelaHash *tabela)
+
 #endif
