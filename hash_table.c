@@ -85,7 +85,7 @@ void insPalavra(TabelaHash *tabela, const char *palavra, const char *significado
 }
 
 EntradaHash *buscarPalavra(TabelaHash *tabela, const char *palavra) {
-    if (tabela = NULL) return NULL;
+    if (tabela == NULL) return NULL;
 
     // Calcula o índice da palavra
     unsigned int indice = funcaoHash(palavra, tabela -> tamanho);
