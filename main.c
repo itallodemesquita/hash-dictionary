@@ -42,6 +42,8 @@ int main() {
             continue;
         }
 
+        limpar_buffer(); // Limpa o teclado
+
         switch (opcao) {
             case 1:
                 printf("Digite a palavra: ");
