@@ -70,7 +70,7 @@ void insPalavra(TabelaHash *tabela, const char *palavra, const char *significado
     novaEntrada -> palavra = strdup(palavra);
 
     // Cria o primeiro nó da lista de significados
-    novaEntrada -> significados == (Significado*) malloc(sizeof(Significado));
+    novaEntrada -> significados = (Significado*) malloc(sizeof(Significado));
     if(novaEntrada -> significados == NULL) {
         free(novaEntrada -> palavra);
         free(novaEntrada);
@@ -81,11 +81,11 @@ void insPalavra(TabelaHash *tabela, const char *palavra, const char *significado
 
     // Insere a nova entrada no início da lista
     novaEntrada -> proximo = tabela -> tabela[indice];
-    tabela -> tabela[indice];
+    tabela -> tabela[indice] = novaEntrada;
 }
 
 EntradaHash *buscarPalavra(TabelaHash *tabela, const char *palavra) {
-    if (tabela = NULL) return NULL;
+    if (tabela == NULL) return NULL;
 
     // Calcula o índice da palavra
     unsigned int indice = funcaoHash(palavra, tabela -> tamanho);

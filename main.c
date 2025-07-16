@@ -47,10 +47,12 @@ int main() {
         switch (opcao) {
             case 1:
                 printf("Digite a palavra: ");
+                palavra[0] = '\0'; // limpa o buffer de palavra
                 scanf("%99[^\n]", palavra);
                 limpar_buffer();
 
                 printf("Digite o significado: ");
+                significado[0] = '\0'; // limpa o buffer do significado
                 scanf("%99[^\n]", significado);
                 limpar_buffer();
 
