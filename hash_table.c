@@ -183,3 +183,44 @@ void listar(TabelaHash *tabela) {
 
     printf("\n-- Fim da lista -- \n");
 }
+
+void salvarDicionario(TabelaHash *tabela, const char *nomeArquivo) {
+    if (tabela == NULL) return;
+
+    FILE *arquivo = fopen(nomeArquivo, "w"); // Abre em modo escrita
+    if (arquivo == NULL) {
+        perror("Erro ao abrir arquivo para salvar");
+        return;
+    }
+
+    // Percorre cada bucket da tabela
+    for (int i = 0; i < tabela -> tamanho; i++) {
+        EntradaHash *entrada = tabela -> tabela[i];
+
+        // Se não estiver vazio, percorre a lista
+        while (entrada != NULL) {
+            // Escreve a palavra seguida de :
+            fprintf(arquivo, "%s:", entrada -> palavra);
+
+            // Percorre e escreve os seus significados
+            Significado *sig = entrada -> significados;
+            while (sig != NULL) {
+                fprintf(arquivo, "%s", sig -> definicao);
+                // Adiciona '|' se houver outro significado
+                if (sig -> proximo != NULL) {
+                    fprintf(arquivo, "|");
+                }
+
+                sig = sig -> proximo;
+            }
+
+            // Adiciona nova linha para a proxima entrada
+            fprintf(arquivo, "\n");
+
+            entrada = entrada -> proximo;
+
+        }
+    }
+
+    fclose(arquivo); // Fecha o arquivo
+}
