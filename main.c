@@ -22,7 +22,11 @@ void menu() {
 
 int main() {
     int tamanho_tabela = 100;
+    const char *nome_arquivo = "dicionario.txt";
     TabelaHash *dicionario = criarTabela(tamanho_tabela);
+
+    // Carrega dicionário no início
+    carregarDicionario(dicionario, nome_arquivo);
 
     if (dicionario == NULL) {
         printf("Erro: não foi possível criar o dicionário.\n");
@@ -92,6 +96,8 @@ int main() {
                 break;
 
             case 5:
+                // Salva dicionario ao sair
+                salvarDicionario(dicionario, nome_arquivo);
                 printf("Saindo...\n");
                 break;
 
