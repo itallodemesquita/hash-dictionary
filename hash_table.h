@@ -33,4 +33,8 @@ void removerPalavra(TabelaHash *tabela, const char *palavra);
 
 void listar(TabelaHash *tabela);
 
+void salvarDicionario(TabelaHash *tabela, const char *nomeArquivo);
+
+void carregarDicionario(TabelaHash *tabela, const char *nomeArquivo);
+
 #endif
