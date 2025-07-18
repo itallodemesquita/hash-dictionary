@@ -65,7 +65,7 @@ int main() {
                 break;
                 
             case 2:
-                printf("DIgite a palavra a ser buscada: ");
+                printf("Digite a palavra a ser buscada: ");
                 scanf("%99[^\n]", palavra);
                 limpar_buffer();
 
